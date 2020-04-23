@@ -9,7 +9,8 @@ public class 快速排序 {
         int[] data = {6, 2, 7, 3, 8, 9};
         int[] data1 = {1, 2, 3, 4, 5, 6};
         int[] data2 = {6, 5, 4, 3, 2, 1};
-        Arrays.stream(quickSort1(data2, 0, data2.length - 1)).forEach(x -> System.out.print(x + " "));
+//        Arrays.stream(quickSort1(data2, 0, data2.length - 1)).forEach(x -> System.out.print(x + " "));
+        System.out.println(findMinNValue(data, 2));
     }
     
     /**
@@ -63,7 +64,7 @@ public class 快速排序 {
     }
     
     /**
-     * 返回枢纽元的下标
+     * 返回枢纽元的下标,时间复杂度O(n)
      */
     public static int partition(int[] data, int start, int end) {
         int key = data[end];
@@ -81,5 +82,28 @@ public class 快速排序 {
         data[i] = data[end];
         data[end] = tmp;
         return i;
+    }
+    
+    /**
+     * 找到第n小的数
+     * 利用快排的分区思想
+     * 对于升序的数组，第n小的元素即为下标为n-1的元素
+     * 每次分区相当于确定了枢纽元在数组中的位置，即确定了枢纽元是数组中第几小的元素
+     */
+    public static Integer findMinNValue(int[] data, int n) {
+        if (data.length < n) {
+            return null;
+        }
+        int start = 0, end = data.length - 1;
+        while (true) {
+            int partition = partition(data, start, end);
+            if (partition + 1 == n) {
+                return data[partition];
+            } else if (partition + 1 > n) {
+                end = partition - 1;
+            }else {
+                start = partition + 1;
+            }
+        }
     }
 }
