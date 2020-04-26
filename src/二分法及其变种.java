@@ -6,6 +6,7 @@ public class 二分法及其变种 {
     
     public static void main(String[] args) {
         int[] a = {1, 2, 3, 5, 5, 5, 7, 8, 9, 0};
+        System.out.println(search(a, 7));
         System.out.println(searchFirstValue(a, 5));
         System.out.println(searchLastValue(a, 5));
         System.out.println(searchFirstBiggerOrEqualValue(a, 5));
@@ -14,6 +15,25 @@ public class 二分法及其变种 {
         System.out.println(searchLastLessOrEqualValue(a, 6));
     }
     
+    
+    /**
+     * 正常二分法
+     */
+    private static int search(int[] a, int value) {
+        int low = 0;
+        int high = a.length - 1;
+        while (low <= high) {
+            int mid = low + ((high - low) >> 1);
+            if (a[mid] < value) {
+                low = mid + 1;
+            } else if (a[mid] > value){
+                high = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        return -1;
+    }
     
     /**
      * 查找第一个等于给定值的元素(5)，即a[3]
