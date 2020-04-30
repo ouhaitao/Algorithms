@@ -17,19 +17,23 @@ public class 动态规划 {
 
         //初始化边界
         for (int i = 1; i < c + 1; i++) {
-            if (i < w[1])
+            if (i < w[1]) {
                 res[1][i] = 0;
-            else
+            }
+            else {
                 res[1][i] = v[1];
+            }
         }
 
         //从放入第二个物体开始算起
         for (int n = 2; n < 6; n++) {
             for (int m = 1; m < 11; m++) {
-                if (m < w[n])
+                if (m < w[n]) {
                     res[n][m] = res[n - 1][m];
-                else
+                }
+                else {
                     res[n][m] = Math.max(res[n - 1][m], res[n - 1][m - w[n]] + v[n]);
+                }
             }
         }
         System.out.println(res[5][10]);
